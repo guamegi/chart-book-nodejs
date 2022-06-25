@@ -54,7 +54,7 @@ const addIndexData = async (symbol = "KOSPI", timeframe = "day") => {
   };
 
   await getHtml(symbol, startTime, endTime, timeframe).then((html) => {
-    console.log(html.data, typeof html.data);
+    // console.log(html.data, typeof html.data);
     let tempData = html.data.replaceAll("'", '"');
     data = JSON.parse(tempData);
   });
@@ -75,7 +75,7 @@ const addStockData = (code) => {
   };
 
   getHtml(code).then((html) => {
-    console.log(html);
+    // console.log(html);
     const priceData = html.data.datas[0].closePrice;
     const changeRateData = html.data.datas[0].fluctuationsRatio;
     const changePriceData = html.data.datas[0].compareToPreviousClosePrice;
