@@ -7,10 +7,36 @@ const app = express();
 // path 모듈 불러오기
 const path = require("path");
 
+const { createProxyMiddleware } = require("http-proxy-middleware");
+
+// 주식 종목 시세 호출
+app.use(
+  createProxyMiddleware("/api", {
+    target: "https://polling.finance.naver.com",
+    changeOrigin: true,
+  })
+);
+
+// kospi 시세 호출
+app.use(
+  createProxyMiddleware("/siseJson.naver", {
+    target: "https://api.finance.naver.com",
+    changeOrigin: true,
+  })
+);
+
+// card world price 호출
+app.use(
+  createProxyMiddleware("/worldstock", {
+    target: "https://polling.finance.naver.com/api/realtime",
+    changeOrigin: true,
+  })
+);
+
 // 미들웨어 함수를 특정 경로에 등록
-app.use("/api/data", function (req, res) {
-  res.json({ greeting: "Hello World" });
-});
+// app.use("/api/data", function (req, res) {
+//   res.json({ greeting: "Hello World" });
+// });
 
 // 기본 포트를 app 객체에 설정
 const port = process.env.PORT || 5000;
