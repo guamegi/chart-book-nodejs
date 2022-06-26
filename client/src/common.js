@@ -4,10 +4,22 @@ const comma = (str) => {
   return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
 };
 
+// 콤마 제거
 const uncomma = (str) => {
   return str.replaceAll(",", "");
 };
 
+// today "YYYYMMdd"
+const getToday = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = ("0" + (date.getMonth() + 1)).slice(-2);
+  const day = ("0" + date.getDate()).slice(-2);
+
+  return year + month + day;
+};
+
+// "시:분:초"
 const getTimeStr = () => {
   const today = new Date();
   const hours = ("0" + today.getHours()).slice(-2);
@@ -42,4 +54,4 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
-export { comma, uncomma, getTimeStr, number_format };
+export { comma, uncomma, getToday, getTimeStr, number_format };

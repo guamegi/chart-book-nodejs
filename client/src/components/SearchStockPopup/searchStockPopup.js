@@ -1,9 +1,9 @@
 import React, { forwardRef, useState } from "react";
 
 import stockList from "config/stockList";
-import styles from "./searchStockPopup.module.css";
 import { initWebSocket } from "services/websocket";
 import { addStockData } from "config/crawler";
+import styles from "./searchStockPopup.module.css";
 
 const searchStockPopup = forwardRef((props, ref) => {
   const { modalOn, setModalOn, stockData, setStockData } = props;
@@ -51,7 +51,7 @@ const searchStockPopup = forwardRef((props, ref) => {
     const words = stockList.filter((stock) =>
       stock.name.includes(e.target.value.toUpperCase())
     );
-    console.log(words);
+    // console.log(words);
     setSearchList(words);
   };
 

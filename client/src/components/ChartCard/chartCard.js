@@ -21,6 +21,7 @@ const ChartCard = ({ item }) => {
               <img
                 className={styles.cardImg}
                 src={`https://ssl.pstatic.net/imgfinance/chart/world/continent/${item.shortName}@${item.code}.png`}
+                alt="index chart"
               />
             </div>
           </div>

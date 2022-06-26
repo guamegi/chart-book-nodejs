@@ -9,7 +9,7 @@ import styles from "./market.module.css";
 
 let chart = null;
 const Home = () => {
-  const tvChartRef = useRef();
+  const tvChartRef = useRef(); // trading view chart selector
 
   let kospiData = [];
   const [cardInfo, setCardInfo] = useState([
@@ -85,7 +85,6 @@ const Home = () => {
       chart = null;
     }
 
-    // trading view 차트 생성
     chart = createChart(tvChartRef.current, {
       width: tvChartRef.current.offsetWidth,
       height: 500,
