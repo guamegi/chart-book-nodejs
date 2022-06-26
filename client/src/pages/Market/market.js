@@ -1,14 +1,15 @@
 /* eslint-disable */
 import React, { useEffect, useRef, useState } from "react";
 import { createChart, CrosshairMode } from "lightweight-charts";
-import { addIndexData, addCardData } from "config/crawler";
 import { Carousel } from "@trendyol-js/react-carousel";
+
+import { addIndexData, addCardData } from "config/crawler";
+import { ChartCard } from "../../components";
 import styles from "./market.module.css";
 
 let chart = null;
 const Home = () => {
   const tvChartRef = useRef();
-  const cardInfoRef = useRef({});
 
   let kospiData = [];
   const [cardInfo, setCardInfo] = useState([
@@ -230,46 +231,6 @@ const Home = () => {
     setChartInterval([interval]);
   };
 
-  // const updateCard = (symbol) => {
-  //   // console.log(cardInfoRef.current);
-  //   // TODO: cardInfo 에 price, chart 생성해서 넣기
-  //   addCardData(symbol)
-  // };
-
-  /*
-  // 상단 차트 카드
-  const ChartCard = (name, price, chart) => {
-    // console.log(name, price, chart);
-    updateCard(name, price, chart);
-    return (
-      <div className="ml-2 mr-2">
-        <div className="card">
-          <div className="card-body">
-            <div className="col d-flex flex-column justify-content-between">
-              <div className="row p-2">
-                <div className="text-uppercase text-primary font-weight-bold mb-0">
-                  <span ref={(el) => (cardInfoRef.current[name] = el)}>
-                    종목명
-                  </span>
-                </div>
-                <div className="text-dark font-weight-bold h5 ml-3 mb-0">
-                  <span ref={(el) => (cardInfoRef.current[price] = el)}>
-                    83,120,630
-                  </span>
-                </div>
-              </div>
-              <div className={styles.cardChart}>
-                <span ref={(el) => (cardInfoRef.current[chart] = el)}>
-                  chart image
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-  */
   const RightArrow = () => {
     return (
       <button className={styles.arrow}>
@@ -299,41 +260,7 @@ const Home = () => {
           dynamic={true}
         >
           {cardInfo.map((item, index) => {
-            // console.log(cardInfo);
-            return (
-              // <ChartCard
-              //   name={el.name}
-              //   price={el.price}
-              //   chart={el.chart}
-              //   key={index}
-              // />
-              <div className="ml-2 mr-2" key={index}>
-                <div className="card">
-                  <div className="card-body">
-                    <div className="col d-flex flex-column justify-content-between">
-                      <div className="row ml-1 mb-2">
-                        <div className="text-uppercase text-primary font-weight-bold mb-0">
-                          {item.name}
-                        </div>
-                        <div className="text-dark font-weight-bold ml-4 mb-0">
-                          <span
-                            ref={(el) => (cardInfoRef.current[item.name] = el)}
-                          >
-                            {item.price}
-                          </span>
-                        </div>
-                      </div>
-                      <div className={styles.cardChart}>
-                        <img
-                          className={styles.cardImg}
-                          src={`https://ssl.pstatic.net/imgfinance/chart/world/continent/${item.shortName}@${item.code}.png`}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
+            return <ChartCard key={index} item={item} />;
           })}
         </Carousel>
 
