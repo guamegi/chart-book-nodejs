@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/chart-book/static/css/main.48590cba.chunk.css",
+    "main.js": "/chart-book/static/js/main.a045e291.chunk.js",
+    "main.js.map": "/chart-book/static/js/main.a045e291.chunk.js.map",
+    "runtime-main.js": "/chart-book/static/js/runtime-main.2b65fc12.js",
+    "runtime-main.js.map": "/chart-book/static/js/runtime-main.2b65fc12.js.map",
+    "static/js/2.0f23035c.chunk.js": "/chart-book/static/js/2.0f23035c.chunk.js",
+    "static/js/2.0f23035c.chunk.js.map": "/chart-book/static/js/2.0f23035c.chunk.js.map",
+    "index.html": "/chart-book/index.html",
+    "precache-manifest.fb7597cc3085b52087c7950e0a135ee2.js": "/chart-book/precache-manifest.fb7597cc3085b52087c7950e0a135ee2.js",
+    "service-worker.js": "/chart-book/service-worker.js",
+    "static/css/main.48590cba.chunk.css.map": "/chart-book/static/css/main.48590cba.chunk.css.map",
+    "static/js/2.0f23035c.chunk.js.LICENSE.txt": "/chart-book/static/js/2.0f23035c.chunk.js.LICENSE.txt",
+    "static/js/main.a045e291.chunk.js.LICENSE.txt": "/chart-book/static/js/main.a045e291.chunk.js.LICENSE.txt",
+    "static/media/fontawesome-all.min.css": "/chart-book/static/media/fa-solid-900.f6121be5.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2b65fc12.js",
+    "static/js/2.0f23035c.chunk.js",
+    "static/css/main.48590cba.chunk.css",
+    "static/js/main.a045e291.chunk.js"
+  ]
+}
