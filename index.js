@@ -39,7 +39,7 @@ app.use(
 // });
 
 // 기본 포트를 app 객체에 설정
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 app.listen(port);
 
 // 리액트 정적 파일 제공
