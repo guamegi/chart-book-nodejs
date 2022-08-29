@@ -54,4 +54,15 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
-export { comma, uncomma, getToday, getTimeStr, number_format };
+const checkMobile = () => {
+  const user = navigator.userAgent;
+  let isCheck = false;
+
+  if (user.indexOf("iPhone") > -1 || user.indexOf("Android") > -1) {
+    isCheck = true;
+  }
+
+  return isCheck;
+};
+
+export { comma, uncomma, getToday, getTimeStr, number_format, checkMobile };

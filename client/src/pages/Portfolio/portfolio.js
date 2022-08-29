@@ -9,8 +9,14 @@ import {
   initWebSocket,
 } from "services/websocket";
 import { addStockData } from "config/crawler";
-import { removeLineChart } from "chart/area";
-import { removeDoughnutChart } from "chart/doughnut";
+import { initLineChart, removeLineChart, setLineChart } from "chart/area";
+import {
+  initDoughnutChart,
+  removeDoughnutChart,
+  setDoughnutChart,
+} from "chart/doughnut";
+import { checkMobile } from "common";
+import styles from "./portfolio.module.css";
 
 let stockInterval = {};
 const Portfolio = () => {
@@ -18,6 +24,7 @@ const Portfolio = () => {
   const [modalOn, setModalOn] = useState(false);
   const addButtonEl = useRef();
   const stockPopupEl = useRef();
+  const isMobile = checkMobile();
 
   useEffect(() => {
     if (ws.length > 0) {
@@ -26,11 +33,16 @@ const Portfolio = () => {
     }
     loadData();
 
+    setLineChart();
+    setDoughnutChart();
+    initLineChart();
+    initDoughnutChart();
+
     document.addEventListener("click", closeModal);
     document.addEventListener("visibilitychange", handleVisibilityChange);
     return () => {
       document.removeEventListener("click", closeModal);
-      document.addEventListener("visibilitychange", handleVisibilityChange);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
 
       /**
        * myLineChart, myDoughnutChart 제거
@@ -48,19 +60,46 @@ const Portfolio = () => {
   async function loadData() {
     // localData 체크
     const localDataStr = localStorage.getItem("saveData");
-
+    let data = null;
     console.log("load data");
-    const data = JSON.parse(localDataStr);
-    const dataArr = [];
+
+    if (localDataStr) {
+      console.log("saved");
+      data = JSON.parse(localDataStr);
+    } else {
+      console.log("not saved");
+      // default data
+      data = {
+        0: {
+          amount: "0.1",
+          avgPrice: "20,000,000",
+          category: "coin",
+          code: "BTC",
+          codes: "KRW-BTC",
+          en_name: "Bitcoin",
+          name: "비트코인",
+        },
+        1: {
+          amount: "10",
+          avgPrice: "50,000",
+          category: "stock",
+          code: "005930",
+          codes: null,
+          en_name: null,
+          name: "삼성전자",
+        },
+      };
+    }
+
+    let dataArr = [];
     for (let i in data) {
       dataArr.push(data[i]);
     }
-    // console.log("dataArr:", dataArr);
+    console.log("dataArr:", dataArr);
     await setStockData(dataArr); // table 추가
 
     // 실시간
     for (let data of dataArr) {
-      // stockInterval = {};
       if (data.category === "stock") {
         clearInterval(stockInterval[data.code]);
         stockInterval[data.code] = null;
@@ -113,7 +152,8 @@ const Portfolio = () => {
   // add new 클릭. 모달 창 열기
   const openModal = () => {
     setModalOn(!modalOn);
-    // addButtonEl.current.focus();
+    // console.log(stockPopupEl.current);
+    // stockPopupEl.current.focus();
   };
 
   // background 클릭. 모달 창 닫기
@@ -183,7 +223,7 @@ const Portfolio = () => {
     <div className="container">
       <div className="row">
         {/* 총 매수 */}
-        <div className="col-md-6 col-xl-3 mb-4">
+        <div className="col-6 col-sm-6 col-md-6 col-xl-3 mb-4">
           <div className="card shadow border-left-primary py-2">
             <div className="card-body">
               <div className="row align-items-center no-gutters">
@@ -200,7 +240,7 @@ const Portfolio = () => {
           </div>
         </div>
         {/* 총 평가 */}
-        <div className="col-md-6 col-xl-3 mb-4">
+        <div className="col-6 col-sm-6 col-md-6 col-xl-3 mb-4">
           <div className="card shadow border-left-success py-2">
             <div className="card-body">
               <div className="row align-items-center no-gutters">
@@ -217,7 +257,7 @@ const Portfolio = () => {
           </div>
         </div>
         {/* 평가 손익 */}
-        <div className="col-md-6 col-xl-3 mb-4">
+        <div className="col-6 col-sm-6 col-md-6 col-xl-3 mb-4">
           <div className="card shadow border-left-info py-2">
             <div className="card-body">
               <div className="row align-items-center no-gutters">
@@ -234,7 +274,7 @@ const Portfolio = () => {
           </div>
         </div>
         {/* 수익률 */}
-        <div className="col-md-6 col-xl-3 mb-4">
+        <div className="col-6 col-sm-6 col-md-6 col-xl-3 mb-4">
           <div className="card shadow border-left-warning py-2">
             <div className="card-body">
               <div className="row align-items-center no-gutters">
@@ -285,24 +325,32 @@ const Portfolio = () => {
       <hr />
       {/* <!-- table --> */}
       {/* <!-- Page Heading --> */}
-      <div className="row justify-content-between">
-        <div>
-          <button
+      <div className="row d-flex justify-content-between">
+        <div
+          className={
+            isMobile
+              ? "col-xl-3 col-md-5 col-sm-6 d-flex justify-content-center"
+              : null
+          }
+        >
+          <div
             id="addStock"
             className="btn btn-light ml-2"
+            role="button"
             onClick={openModal}
             ref={addButtonEl}
           >
             <i className="fas fa-plus mr-2"></i>
             종목 추가
-          </button>
-          <button
+          </div>
+          <div
             className="btn btn-light text-danger ml-2"
+            role="button"
             onClick={removeAllStock}
           >
             <i className="fas fa-trash mr-2"></i>
             전체 삭제
-          </button>
+          </div>
           {modalOn ? (
             <SearchStockPopup
               modalOn={modalOn}
@@ -315,9 +363,15 @@ const Portfolio = () => {
             ""
           )}
         </div>
-        <div>
+        <div
+          className={
+            isMobile
+              ? "col-xl-3 col-md-5 col-sm-6 d-flex justify-content-center"
+              : null
+          }
+        >
           <button className="btn btn-info" onClick={saveData}>
-            save
+            종목 저장
           </button>
           <button className="btn btn-success ml-2" onClick={getData}>
             get data
@@ -377,9 +431,10 @@ const Portfolio = () => {
                     </td>
                     <td>
                       <NumberFormat
-                        className="avgPrice bg-light form-control small"
+                        className={`${styles.stockInput} avgPrice bg-light form-control small`}
                         placeholder="평균단가 입력"
                         name="avgPrice"
+                        type="tel"
                         id={`${
                           stock.category === "stock"
                             ? "A" + stock.code
@@ -391,9 +446,10 @@ const Portfolio = () => {
                     </td>
                     <td>
                       <NumberFormat
-                        className="amount bg-light form-control small"
+                        className={`${styles.stockInput} amount bg-light form-control small`}
                         placeholder="수량 입력"
                         name="amount"
+                        type="tel"
                         id={`${
                           stock.category === "stock"
                             ? "A" + stock.code
