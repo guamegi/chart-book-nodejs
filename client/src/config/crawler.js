@@ -9,7 +9,7 @@ const addCardData = async () => {
   let data = null;
 
   const getHtml = async () => {
-    const stockUrl = `worldstock/index/.DJI%2C.IXIC%2C.INX%2C.FTSE%2C.FCHI%2C.GDAXI%2C.`;
+    const stockUrl = `/worldstock/index/.DJI%2C.IXIC%2C.INX%2C.FTSE%2C.FCHI%2C.GDAXI%2C.`;
 
     try {
       return await axios.get(stockUrl);
@@ -70,7 +70,7 @@ const addStockData = async (code) => {
   };
 
   await getHtml(code).then((html) => {
-    // console.log(html.data, typeof html.data);
+    console.log(html.data, typeof html.data);
     data = html.data.datas[0];
   });
 
