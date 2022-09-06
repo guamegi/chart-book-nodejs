@@ -10,6 +10,7 @@ import styles from "./market.module.css";
 let chart = null;
 const Home = () => {
   const tvChartRef = useRef(); // trading view chart selector
+  const marketEl = useRef(); // market list
 
   let kospiData = [];
   const [cardInfo, setCardInfo] = useState([
@@ -62,6 +63,7 @@ const Home = () => {
     kospiData.push(data);
     makeChart();
     updateCardPrice();
+    marketEl.current.childNodes[0].style = "font-weight: bold";
   }, []);
 
   const updateCardPrice = () => {
@@ -225,9 +227,26 @@ const Home = () => {
     // console.log(symbol, interval);
     if (symbol) {
       setChartName([symbol]);
+
+      marketEl.current.childNodes.forEach(
+        (el) => (el.style = "font-weight: normal")
+      );
     }
 
     setChartInterval([interval]);
+
+    // seleted market list - font weight: bold
+    switch (symbol) {
+      case "KOSPI":
+        marketEl.current.childNodes[0].style = "font-weight: bold";
+        break;
+      case "KOSDAQ":
+        marketEl.current.childNodes[2].style = "font-weight: bold";
+        break;
+      case "FUT":
+        marketEl.current.childNodes[4].style = "font-weight: bold";
+        break;
+    }
   };
 
   const RightArrow = () => {
@@ -266,7 +285,7 @@ const Home = () => {
         <div className="col">
           <nav className={"navbar navbar-expand"}>
             <div className="container d-flex flex-row">
-              <ul className="nav navbar-nav text-dark">
+              <ul className="nav navbar-nav text-dark" ref={marketEl}>
                 <li
                   className={`mr-2`}
                   role="button"
