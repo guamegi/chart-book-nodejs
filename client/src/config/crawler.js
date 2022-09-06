@@ -70,7 +70,7 @@ const addStockData = async (code) => {
   };
 
   await getHtml(code).then((html) => {
-    console.log(html.data, typeof html.data);
+    // console.log(html.data, typeof html.data);
     data = html.data.datas[0];
   });
 

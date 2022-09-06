@@ -32,7 +32,6 @@ const Portfolio = () => {
       removeAllWebSocket();
     }
     loadData();
-
     setLineChart();
     setDoughnutChart();
     initLineChart();
@@ -40,6 +39,7 @@ const Portfolio = () => {
 
     document.addEventListener("click", closeModal);
     document.addEventListener("visibilitychange", handleVisibilityChange);
+
     return () => {
       document.removeEventListener("click", closeModal);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
@@ -152,8 +152,13 @@ const Portfolio = () => {
   // add new 클릭. 모달 창 열기
   const openModal = () => {
     setModalOn(!modalOn);
-    // console.log(stockPopupEl.current);
-    // stockPopupEl.current.focus();
+
+    setTimeout(function () {
+      if (stockPopupEl.current) {
+        // console.log(stockPopupEl);
+        stockPopupEl.current.focus();
+      }
+    }, 100);
   };
 
   // background 클릭. 모달 창 닫기
