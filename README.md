@@ -1,4 +1,4 @@
-# React + Express 연동 주식&가상화폐 포트폴리오 웹 앱
+# React + Express 주식&가상화폐 포트폴리오 웹 앱
 
 View deployment
 https://chart-book.herokuapp.com/
