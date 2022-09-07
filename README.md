@@ -1,7 +1,7 @@
 # React + Express 주식&가상화폐 포트폴리오 웹 앱
 
-View deployment
-https://chart-book.herokuapp.com/
+View deployment (이전) <br/>
+https://chart-book.herokuapp.com/ -> http://chartbook-env.eba-i9kwj8ti.ap-northeast-2.elasticbeanstalk.com/portfolio
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
