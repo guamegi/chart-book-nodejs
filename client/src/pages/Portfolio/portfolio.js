@@ -95,7 +95,7 @@ const Portfolio = () => {
     for (let i in data) {
       dataArr.push(data[i]);
     }
-    console.log("dataArr:", dataArr);
+    // console.log("dataArr:", dataArr);
     await setStockData(dataArr); // table 추가
 
     // 실시간
