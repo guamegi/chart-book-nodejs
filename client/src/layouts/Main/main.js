@@ -17,7 +17,7 @@ const Main = (props) => {
         <footer className="bg-white sticky-footer">
           <div className="container my-auto">
             <div className="text-center my-auto copyright">
-              <span>Copyright © 2022</span>
+              <span>© MH 2022. All Rights Reserved.</span>
             </div>
           </div>
         </footer>

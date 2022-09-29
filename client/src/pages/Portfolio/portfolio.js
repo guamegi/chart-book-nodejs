@@ -330,7 +330,13 @@ const Portfolio = () => {
       <hr />
       {/* <!-- table --> */}
       {/* <!-- Page Heading --> */}
-      <div className="row d-flex justify-content-between">
+      <div
+        className={
+          isMobile
+            ? "row d-flex justify-content-around"
+            : "row d-flex justify-content-between"
+        }
+      >
         <div
           className={
             isMobile ? "col-md-5 col-sm-6 d-flex justify-content-center" : null
