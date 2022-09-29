@@ -5,12 +5,14 @@ import { Carousel } from "@trendyol-js/react-carousel";
 
 import { addIndexData, addCardData } from "config/crawler";
 import { ChartCard } from "../../components";
+import { checkMobile } from "common";
 import styles from "./market.module.css";
 
 let chart = null;
 const Home = () => {
   const tvChartRef = useRef(); // trading view chart selector
   const marketEl = useRef(); // market list
+  const isMobile = checkMobile();
 
   let kospiData = [];
   const [cardInfo, setCardInfo] = useState([
@@ -268,8 +270,8 @@ const Home = () => {
     <div className="container mb-4">
       <div className="col">
         <Carousel
-          show={2.5}
-          slide={2}
+          show={isMobile ? 1.2 : 2.5}
+          slide={isMobile ? 1 : 2}
           transition={0.9}
           swiping={true}
           rightArrow={<RightArrow />}
@@ -284,7 +286,7 @@ const Home = () => {
 
         <div className="col">
           <nav className={"navbar navbar-expand"}>
-            <div className="container d-flex flex-row">
+            <div className="container d-flex flex-row justify-content-between">
               <ul className="nav navbar-nav text-dark" ref={marketEl}>
                 <li
                   className={`mr-2`}
@@ -317,9 +319,11 @@ const Home = () => {
                 </li>
               </ul>
               <ul className="nav navbar-nav text-dark">
-                <li className="p-2">
-                  <span className="text-muted">Interval:</span>
-                </li>
+                {isMobile ? null : (
+                  <li className="p-2">
+                    <span className="text-muted">Interval:</span>
+                  </li>
+                )}
                 <li className="nav-item dropdown">
                   <div
                     className="nav-link dropdown-toggle text-muted"
