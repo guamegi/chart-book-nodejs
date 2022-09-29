@@ -128,7 +128,11 @@ const initLineChart = () => {
   const dataTable = document.querySelector("#dataTable");
 
   // 5초마다 총 평가금액 라인차트에 추가
-  lineInterval = setInterval(function () {
+  lineInterval = setInterval(updateLineChart, updateTime);
+
+  setTimeout(updateLineChart, 300);
+
+  function updateLineChart() {
     for (let i = 0; i < dataTable.childNodes.length; i++) {
       // console.log(dataTable.childNodes[i].id);
       const stockCode = dataTable.childNodes[i].id;
@@ -152,7 +156,7 @@ const initLineChart = () => {
     myLineChart.data.labels = xAxes;
 
     myLineChart.update();
-  }, updateTime);
+  }
 };
 
 export { setLineChart, initLineChart, removeLineChart };

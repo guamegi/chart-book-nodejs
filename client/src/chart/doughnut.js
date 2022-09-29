@@ -73,7 +73,11 @@ const initDoughnutChart = () => {
   // console.log(dataTable.childNodes);
 
   // 추가된 종목들의 평가금액 가져와서 비율 계산한 다음 데이터 넣기
-  doughnutInterval = setInterval(function () {
+  doughnutInterval = setInterval(updateDoughnutChart, updateTime);
+
+  setTimeout(updateDoughnutChart, 300);
+
+  function updateDoughnutChart() {
     let data = [];
     let name = [];
     for (let i = 0; i < dataTable.childNodes.length; i++) {
@@ -101,7 +105,7 @@ const initDoughnutChart = () => {
     myDoughnutChart.data.datasets[0].data = data;
     myDoughnutChart.data.labels = name.length > 0 ? name : "-";
     myDoughnutChart.update();
-  }, updateTime);
+  }
 };
 
 const removeDoughnutChart = () => {

@@ -228,7 +228,7 @@ const Portfolio = () => {
     <div className="container">
       <div className="row">
         {/* 총 매수 */}
-        <div className="col-6 col-sm-6 col-md-6 col-xl-3 mb-4">
+        <div className="col-lg-3 col-md-6 mb-4">
           <div className="card shadow border-left-primary py-2">
             <div className="card-body">
               <div className="row align-items-center no-gutters">
@@ -245,7 +245,7 @@ const Portfolio = () => {
           </div>
         </div>
         {/* 총 평가 */}
-        <div className="col-6 col-sm-6 col-md-6 col-xl-3 mb-4">
+        <div className="col-lg-3 col-md-6 mb-4">
           <div className="card shadow border-left-success py-2">
             <div className="card-body">
               <div className="row align-items-center no-gutters">
@@ -262,7 +262,7 @@ const Portfolio = () => {
           </div>
         </div>
         {/* 평가 손익 */}
-        <div className="col-6 col-sm-6 col-md-6 col-xl-3 mb-4">
+        <div className="col-lg-3 col-md-6 mb-4">
           <div className="card shadow border-left-info py-2">
             <div className="card-body">
               <div className="row align-items-center no-gutters">
@@ -279,7 +279,7 @@ const Portfolio = () => {
           </div>
         </div>
         {/* 수익률 */}
-        <div className="col-6 col-sm-6 col-md-6 col-xl-3 mb-4">
+        <div className="col-lg-3 col-md-6 mb-4">
           <div className="card shadow border-left-warning py-2">
             <div className="card-body">
               <div className="row align-items-center no-gutters">
@@ -299,7 +299,7 @@ const Portfolio = () => {
 
       <div className="row">
         {/* <!-- Area Chart --> */}
-        <div className="col-xl-7 col-md-7">
+        <div className="col-md-7">
           <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
               <h6 className="m-0 font-weight-bold text-primary">자산 흐름</h6>
@@ -313,7 +313,7 @@ const Portfolio = () => {
         </div>
 
         {/* <!-- Pie Chart --> */}
-        <div className="col-xl-5 col-md-5">
+        <div className="col-md-5">
           <div className="card shadow mb-4">
             {/* <!-- Card Header - Dropdown --> */}
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -333,9 +333,7 @@ const Portfolio = () => {
       <div className="row d-flex justify-content-between">
         <div
           className={
-            isMobile
-              ? "col-xl-3 col-md-5 col-sm-6 d-flex justify-content-center"
-              : null
+            isMobile ? "col-md-5 col-sm-6 d-flex justify-content-center" : null
           }
         >
           <div
@@ -370,9 +368,7 @@ const Portfolio = () => {
         </div>
         <div
           className={
-            isMobile
-              ? "col-xl-3 col-md-5 col-sm-6 d-flex justify-content-center"
-              : null
+            isMobile ? "col-md-5 col-sm-6 d-flex justify-content-center" : null
           }
         >
           <button className="btn btn-info" onClick={saveData}>
