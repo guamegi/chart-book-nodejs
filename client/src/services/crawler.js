@@ -80,11 +80,10 @@ const addStockData = async (code) => {
 // 주식 데이터 셋팅
 const setStockData = (data) => {
   if (!data) return;
-  // getHtml(code).then((html) => {
   // console.log(data);
   const priceData = data.closePrice;
-  const changeRateData = data.fluctuationsRatio;
-  const changePriceData = data.compareToPreviousClosePrice;
+  const cr_txt = data.fluctuationsRatio; // change rate
+  const cp_txt = data.compareToPreviousClosePrice; // change price
   const riseFallData = data.compareToPreviousPrice.text;
 
   const totalAmt = document.querySelector("#totalAmt"); // 총 매수
@@ -105,9 +104,6 @@ const setStockData = (data) => {
 
   if (price) {
     price.textContent = priceData;
-    // changeRate.textContent = changeRateData;
-    // changePrice.textContent = changePriceData;
-
     // input 두개에 값이 있으면, 평가금액/평가손익/수익률 갱신하기
     if (avgPriceInput.value && amountInput.value) {
       //   console.log(avgPriceInput.value, amountInput.value);
@@ -174,22 +170,22 @@ const setStockData = (data) => {
 
     // style 변경
     if (riseFallData === "상승") {
-      changeRate.textContent = `+${changeRateData}%`;
-      changePrice.textContent = `+${changePriceData}`;
+      changeRate.textContent = `+${cr_txt}%`;
+      changePrice.textContent = `+${cp_txt}`;
       price.style.color =
         changeRate.style.color =
         changePrice.style.color =
           "red";
     } else if (riseFallData === "하락") {
-      changeRate.textContent = `${changeRateData}%`;
-      changePrice.textContent = `${changePriceData}`;
+      changeRate.textContent = `${cr_txt}%`;
+      changePrice.textContent = `${cp_txt}`;
       price.style.color =
         changeRate.style.color =
         changePrice.style.color =
           "blue";
     } else {
-      changeRate.textContent = `${changeRateData}%`;
-      changePrice.textContent = `${changePriceData}`;
+      changeRate.textContent = `${cr_txt}%`;
+      changePrice.textContent = `${cp_txt}`;
       price.style.color =
         changeRate.style.color =
         changePrice.style.color =
@@ -202,7 +198,6 @@ const setStockData = (data) => {
       price.style.background = "white";
     }, 100);
   }
-  // });
 };
 
 export { addStockData, addIndexData, addCardData };

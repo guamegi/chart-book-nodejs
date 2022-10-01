@@ -1,7 +1,13 @@
 import { comma, uncomma } from "common";
 
 const calcData = (code, result) => {
+  if (!code || !result) return;
   // console.log(code, result);
+  const priceData = result.trade_price;
+  const cr_txt = (result.change_rate * 100).toFixed(2); // change rate
+  const cp_txt = comma(result.change_price); // change price
+  const riseFallData = result.change;
+
   // 특정 id에 실시간 데이터 표시
   const totalAmt = document.querySelector("#totalAmt");
   const totalEval = document.querySelector("#totalEval");
@@ -20,9 +26,7 @@ const calcData = (code, result) => {
   const profitRate = document.querySelector(`#${code}-yield`);
 
   if (price) {
-    price.textContent = comma(result.trade_price);
-    const cr_txt = (result.change_rate * 100).toFixed(2);
-    const cp_txt = comma(result.change_price);
+    price.textContent = comma(priceData);
 
     // input 두개에 값이 있으면, 평가금액/평가손익/수익률 갱신하기
     if (avgPriceInput.value && amountInput.value) {
@@ -88,14 +92,14 @@ const calcData = (code, result) => {
       profitRate.textContent = "0";
     }
     // style 변경
-    if (result.change === "RISE") {
+    if (riseFallData === "RISE") {
       changeRate.textContent = `+${cr_txt}%`;
       changePrice.textContent = `+${cp_txt}`;
       price.style.color =
         changeRate.style.color =
         changePrice.style.color =
           "red";
-    } else if (result.change === "FALL") {
+    } else if (riseFallData === "FALL") {
       changeRate.textContent = `-${cr_txt}%`;
       changePrice.textContent = `-${cp_txt}`;
       price.style.color =
@@ -116,19 +120,6 @@ const calcData = (code, result) => {
     setTimeout(function () {
       price.style.background = "white";
     }, 100);
-
-    // // data 들어오고 한번만 실행
-    // if (!interval) {
-    //   console.log("has not interval");
-
-    //   interval = setInterval(function () {
-    //     // console.log(myLineChart);
-    //     myLineChart.update();
-    //   }, updateTime);
-
-    //   initLineChart();
-    //   //
-    // }
   }
 };
 
