@@ -8,7 +8,7 @@ import {
   removeAllWebSocket,
   initWebSocket,
 } from "services/websocket";
-import { addStockData } from "config/crawler";
+import { addStockData } from "services/crawler";
 import { initLineChart, removeLineChart, setLineChart } from "chart/area";
 import {
   initDoughnutChart,

@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { createChart, CrosshairMode } from "lightweight-charts";
 import { Carousel } from "@trendyol-js/react-carousel";
 
-import { addIndexData, addCardData } from "config/crawler";
+import { addIndexData, addCardData } from "services/crawler";
 import { ChartCard } from "../../components";
 import { checkMobile } from "common";
 import styles from "./market.module.css";
