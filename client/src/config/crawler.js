@@ -79,6 +79,7 @@ const addStockData = async (code) => {
 
 // 주식 데이터 셋팅
 const setStockData = (data) => {
+  if (!data) return;
   // getHtml(code).then((html) => {
   // console.log(data);
   const priceData = data.closePrice;
@@ -104,8 +105,8 @@ const setStockData = (data) => {
 
   if (price) {
     price.textContent = priceData;
-    changeRate.textContent = changeRateData;
-    changePrice.textContent = changePriceData;
+    // changeRate.textContent = changeRateData;
+    // changePrice.textContent = changePriceData;
 
     // input 두개에 값이 있으면, 평가금액/평가손익/수익률 갱신하기
     if (avgPriceInput.value && amountInput.value) {

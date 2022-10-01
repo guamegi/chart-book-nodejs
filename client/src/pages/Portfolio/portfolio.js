@@ -26,6 +26,38 @@ const Portfolio = () => {
   const stockPopupEl = useRef();
   const isMobile = checkMobile();
 
+  const stockUpdateTime = 10000;
+  const defaultData = {
+    0: {
+      amount: "0.1",
+      avgPrice: "20,000,000",
+      category: "coin",
+      code: "BTC",
+      codes: "KRW-BTC",
+      en_name: "Bitcoin",
+      name: "비트코인",
+    },
+    1: {
+      amount: "10",
+      avgPrice: "50,000",
+      category: "stock",
+      code: "005930",
+      codes: null,
+      en_name: null,
+      name: "삼성전자",
+    },
+  };
+  const cardSectionInfo = [
+    ["primary", "총 매수", "totalAmt"],
+    ["success", "총 평가", "totalEval"],
+    ["info", "평가손익", "totalProfit"],
+    ["warning", "수익률", "totalProfitRate"],
+  ];
+  const chartSectionInfo = [
+    ["7", "자산 흐름", "myAreaChart"],
+    ["5", "보유 비중", "myDoughnutChart"],
+  ];
+
   useEffect(() => {
     if (ws.length > 0) {
       // console.log("ws:", ws);
@@ -69,26 +101,7 @@ const Portfolio = () => {
     } else {
       console.log("not saved");
       // default data
-      data = {
-        0: {
-          amount: "0.1",
-          avgPrice: "20,000,000",
-          category: "coin",
-          code: "BTC",
-          codes: "KRW-BTC",
-          en_name: "Bitcoin",
-          name: "비트코인",
-        },
-        1: {
-          amount: "10",
-          avgPrice: "50,000",
-          category: "stock",
-          code: "005930",
-          codes: null,
-          en_name: null,
-          name: "삼성전자",
-        },
-      };
+      data = { ...defaultData };
     }
 
     let dataArr = [];
@@ -110,10 +123,10 @@ const Portfolio = () => {
         document.querySelector(`#A${data.code}-amount`).value = data.amount;
 
         addStockData(data.code);
-        // stock 10초마다 호출
+        // stock data 반복 호출
         stockInterval[data.code] = setInterval(function () {
           addStockData(data.code);
-        }, 10000);
+        }, stockUpdateTime);
       } else {
         document.querySelector(`#${data.code}-avgPrice`).value = data.avgPrice;
         document.querySelector(`#${data.code}-amount`).value = data.amount;
@@ -227,109 +240,45 @@ const Portfolio = () => {
   return (
     <div className="container">
       <div className="row">
-        {/* 총 매수 */}
-        <div className="col-lg-3 col-md-6 mb-4">
-          <div className="card shadow border-left-primary py-2">
-            <div className="card-body">
-              <div className="row align-items-center no-gutters">
-                <div className="col mr-2">
-                  <div className="text-uppercase text-primary font-weight-bold mb-1">
-                    <span>총 매수</span>
-                  </div>
-                  <div className="text-dark font-weight-bold h5 mb-0">
-                    <span id="totalAmt">0</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* 총 평가 */}
-        <div className="col-lg-3 col-md-6 mb-4">
-          <div className="card shadow border-left-success py-2">
-            <div className="card-body">
-              <div className="row align-items-center no-gutters">
-                <div className="col mr-2">
-                  <div className="text-uppercase text-success font-weight-bold mb-1">
-                    <span>총 평가</span>
-                  </div>
-                  <div className="text-dark font-weight-bold h5 mb-0">
-                    <span id="totalEval">0</span>
+        {cardSectionInfo.map((el, idx) => (
+          <div className="col-lg-3 col-md-6 mb-4" key={idx}>
+            <div className={`card shadow border-left-${el[0]} py-2`}>
+              <div className="card-body">
+                <div className="row align-items-center no-gutters">
+                  <div className="col mr-2">
+                    <div
+                      className={`text-uppercase text-${el[0]} font-weight-bold mb-1`}
+                    >
+                      <span>{el[1]}</span>
+                    </div>
+                    <div className="text-dark font-weight-bold h5 mb-0">
+                      <span id={`${el[2]}`}>0</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        {/* 평가 손익 */}
-        <div className="col-lg-3 col-md-6 mb-4">
-          <div className="card shadow border-left-info py-2">
-            <div className="card-body">
-              <div className="row align-items-center no-gutters">
-                <div className="col mr-2">
-                  <div className="text-uppercase text-info font-weight-bold mb-1">
-                    <span>평가손익</span>
-                  </div>
-                  <div className="text-dark font-weight-bold h5 mb-0 mr-3">
-                    <span id="totalProfit">0</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* 수익률 */}
-        <div className="col-lg-3 col-md-6 mb-4">
-          <div className="card shadow border-left-warning py-2">
-            <div className="card-body">
-              <div className="row align-items-center no-gutters">
-                <div className="col mr-2">
-                  <div className="text-uppercase text-warning font-weight-bold mb-1">
-                    <span>수익률</span>
-                  </div>
-                  <div className="text-dark font-weight-bold h5 mb-0">
-                    <span id="totalProfitRate">0</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
-
       <div className="row">
-        {/* <!-- Area Chart --> */}
-        <div className="col-md-7">
-          <div className="card shadow mb-4">
-            <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 className="m-0 font-weight-bold text-primary">자산 흐름</h6>
-            </div>
-            <div className="card-body">
-              <div className="chart-area">
-                <canvas id="myAreaChart"></canvas>
+        {chartSectionInfo.map((el, idx) => (
+          <div className={`col-md-${el[0]}`} key={idx}>
+            <div className="card shadow mb-4">
+              <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 className="m-0 font-weight-bold text-primary">{el[1]}</h6>
+              </div>
+              <div className="card-body">
+                <div className="chart-area">
+                  <canvas id={`${el[2]}`}></canvas>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        {/* <!-- Pie Chart --> */}
-        <div className="col-md-5">
-          <div className="card shadow mb-4">
-            {/* <!-- Card Header - Dropdown --> */}
-            <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 className="m-0 font-weight-bold text-primary">보유 비중</h6>
-            </div>
-            <div className="card-body">
-              <div className="chart-pie pt-4 pb-2">
-                <canvas id="myDoughnutChart"></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
       <hr />
-      {/* <!-- table --> */}
-      {/* <!-- Page Heading --> */}
+      {/* <!-- table controller --> */}
       <div
         className={
           isMobile
@@ -390,7 +339,7 @@ const Portfolio = () => {
       </div>
       <hr />
 
-      {/* <!-- DataTales Example --> */}
+      {/* <!-- DataTales --> */}
       <div className="row">
         <div className="table-responsive">
           <table className="table table-bordered" width="100%">

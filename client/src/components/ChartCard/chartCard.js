@@ -4,7 +4,7 @@ import styles from "./chartCard.module.css";
 const ChartCard = ({ item }) => {
   // console.log("item:", item);
   return (
-    <div className="ml-2 mr-2">
+    <div className="mx-2">
       <div className="card">
         <div className="card-body">
           <div className="col d-flex flex-column justify-content-between">
