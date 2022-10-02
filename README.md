@@ -1,6 +1,6 @@
-# React 주식&가상화폐 포트폴리오(express 추가 버전)
+# React 주식&가상화폐 포트폴리오(express 추가)
 
-기존 개발 환경에서만 동작하는 chart book 프로젝트(https://github.com/guamegi/chart-book)를 proxy middleware 를 추가한 버전으로 생성.
+기존 개발 환경에서만 동작하는 chart book 프로젝트(https://github.com/guamegi/chart-book) 를 proxy middleware 를 추가한 버전. <br/><br/>
 서버 이전: heroku -> AWS <br/>
 https://chart-book.herokuapp.com/ -> http://chartbook-env.eba-i9kwj8ti.ap-northeast-2.elasticbeanstalk.com/portfolio
 
