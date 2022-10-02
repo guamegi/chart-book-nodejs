@@ -6,7 +6,16 @@ import { addStockData } from "services/crawler";
 import styles from "./searchStockPopup.module.css";
 
 const searchStockPopup = forwardRef((props, ref) => {
-  const { modalOn, setModalOn, stockData, setStockData } = props;
+  console.log(props);
+  const {
+    modalOn,
+    setModalOn,
+    stockData,
+    setStockData,
+    updateStockData,
+    stockInterval,
+    stockUpdateTime,
+  } = props;
   const [searchList, setSearchList] = useState([]);
 
   async function selectStockList(code) {
@@ -26,14 +35,20 @@ const searchStockPopup = forwardRef((props, ref) => {
 
     let avgPriceInput = null;
     if (stock.category === "stock") {
-      addStockData(stock.code);
+      const stockData = await addStockData(stock.code).then(
+        (html) => html.data.datas[0]
+      );
+      updateStockData(stockData);
 
       avgPriceInput = document.querySelector(`#A${stock.code}-avgPrice`);
 
-      // stock 10초마다 호출
-      setInterval(function () {
-        addStockData(stock.code);
-      }, 10000);
+      // stock 반복 호출
+      stockInterval[stock.code] = setInterval(async function () {
+        const stockData = await addStockData(stock.code).then(
+          (html) => html.data.datas[0]
+        );
+        updateStockData(stockData);
+      }, stockUpdateTime);
     } else {
       // coin 시세 호출
       await initWebSocket(stock.code, stock.codes);
