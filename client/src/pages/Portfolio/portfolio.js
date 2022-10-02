@@ -121,7 +121,6 @@ const Portfolio = () => {
         stockInterval[data.code] = null;
 
         // 평단,수량 입력
-        // console.log("stockInterval:", stockInterval);
         document.querySelector(`#A${data.code}-avgPrice`).value = data.avgPrice;
         document.querySelector(`#A${data.code}-amount`).value = data.amount;
 
@@ -129,19 +128,15 @@ const Portfolio = () => {
         const stockData = await addStockData(data.code).then(
           (html) => html.data.datas[0]
         );
-        // console.log("stockData: ", stockData);
         updateStockData(stockData);
 
         // stock data 반복 호출
         stockInterval[data.code] = setInterval(async function () {
-          // addStockData(data.code);
           const stockData = await addStockData(data.code).then(
             (html) => html.data.datas[0]
           );
           updateStockData(stockData);
-          // }, stockUpdateTime);
         }, stockUpdateTime);
-        // console.log(stockInterval);
       } else {
         document.querySelector(`#${data.code}-avgPrice`).value = data.avgPrice;
         document.querySelector(`#${data.code}-amount`).value = data.amount;
@@ -221,17 +216,15 @@ const Portfolio = () => {
   // 실시간 on
   const getData = () => {
     if (ws.length > 0) {
-      removeAllWebSocket();
-      // clearInterval(stockInterval);
+      removeAllWebSocket(); // crypto
       for (let i in stockInterval) {
-        clearInterval(i);
+        clearInterval(i); // stock
       }
     }
     console.log("get data");
     console.log(stockInterval);
 
     stockData.forEach(async (stock) => {
-      console.log(stockData);
       if (stock.category === "coin") {
         initWebSocket(stock.code, stock.codes);
       } else if (stock.category === "stock") {
@@ -274,10 +267,9 @@ const Portfolio = () => {
     }
   };
 
-  // const setTotalAmt = useStore((state) => state.setTotalAmt);
   const { setTotalAmt, setTotalEval, setTotalProfit, setTotalProfitRate } =
     useStore();
-  // 주식 데이터 셋팅
+  // 주식 데이터 update
   const updateStockData = (data) => {
     if (!data) return;
 

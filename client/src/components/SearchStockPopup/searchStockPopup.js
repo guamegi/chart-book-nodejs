@@ -6,7 +6,6 @@ import { addStockData } from "services/crawler";
 import styles from "./searchStockPopup.module.css";
 
 const searchStockPopup = forwardRef((props, ref) => {
-  console.log(props);
   const {
     modalOn,
     setModalOn,
