@@ -86,39 +86,41 @@ const setStockData = (data) => {
   const cp_txt = data.compareToPreviousClosePrice; // change price
   const riseFallData = data.compareToPreviousPrice.text;
 
-  const totalAmt = document.querySelector("#totalAmt"); // 총 매수
-  const totalEval = document.querySelector("#totalEval"); // 총 평가
-  const totalProfit = document.querySelector("#totalProfit"); // 평가손익
-  const totalProfitRate = document.querySelector("#totalProfitRate"); // 수익률
+  const totalAmtEl = document.querySelector("#totalAmt"); // 총 매수
+  const totalEvalEl = document.querySelector("#totalEval"); // 총 평가
+  const totalProfitEl = document.querySelector("#totalProfit"); // 평가손익
+  const totalProfitRateEl = document.querySelector("#totalProfitRate"); // 수익률
 
-  const price = document.querySelector(`#A${data.itemCode}-price`);
-  const changeRate = document.querySelector(`#A${data.itemCode}-changeRate`);
-  const changePrice = document.querySelector(`#A${data.itemCode}-changePrice`);
+  const priceEl = document.querySelector(`#A${data.itemCode}-price`);
+  const changeRateEl = document.querySelector(`#A${data.itemCode}-changeRate`);
+  const changePriceEl = document.querySelector(
+    `#A${data.itemCode}-changePrice`
+  );
 
-  const avgPriceInput = document.querySelector(`#A${data.itemCode}-avgPrice`);
-  const amountInput = document.querySelector(`#A${data.itemCode}-amount`);
+  const avgPriceInputEl = document.querySelector(`#A${data.itemCode}-avgPrice`);
+  const amountInputEl = document.querySelector(`#A${data.itemCode}-amount`);
 
-  const evalPrice = document.querySelector(`#A${data.itemCode}-eval`);
-  const profit = document.querySelector(`#A${data.itemCode}-profit`);
-  const profitRate = document.querySelector(`#A${data.itemCode}-yield`);
+  const evalPriceEl = document.querySelector(`#A${data.itemCode}-eval`);
+  const profitEl = document.querySelector(`#A${data.itemCode}-profit`);
+  const profitRateEl = document.querySelector(`#A${data.itemCode}-yield`);
 
-  if (price) {
-    price.textContent = priceData;
+  if (priceEl) {
+    priceEl.textContent = priceData;
     // input 두개에 값이 있으면, 평가금액/평가손익/수익률 갱신하기
-    if (avgPriceInput.value && amountInput.value) {
+    if (avgPriceInputEl.value && amountInputEl.value) {
       //   console.log(avgPriceInput.value, amountInput.value);
-      evalPrice.textContent = comma(
-        (uncomma(priceData) * uncomma(amountInput.value)).toFixed(0)
+      evalPriceEl.textContent = comma(
+        (uncomma(priceData) * uncomma(amountInputEl.value)).toFixed(0)
       );
-      profit.textContent = comma(
+      profitEl.textContent = comma(
         (
-          uncomma(priceData) * uncomma(amountInput.value) -
-          uncomma(avgPriceInput.value) * uncomma(amountInput.value)
+          uncomma(priceData) * uncomma(amountInputEl.value) -
+          uncomma(avgPriceInputEl.value) * uncomma(amountInputEl.value)
         ).toFixed(0)
       );
-      profitRate.textContent =
+      profitRateEl.textContent =
         (
-          (uncomma(priceData) / uncomma(avgPriceInput.value)) * 100 -
+          (uncomma(priceData) / uncomma(avgPriceInputEl.value)) * 100 -
           100
         ).toFixed(2) + "%";
 
@@ -137,7 +139,7 @@ const setStockData = (data) => {
       for (let i = 0; i < avgPriceNum.length; i++) {
         amtNum += avgPriceNum[i] * amountNum[i];
       }
-      totalAmt.textContent = comma(amtNum.toFixed(0));
+      totalAmtEl.textContent = comma(amtNum.toFixed(0));
 
       // total eval 계산
       const allEvalEl = document.querySelectorAll(".eval");
@@ -145,7 +147,7 @@ const setStockData = (data) => {
       allEvalEl.forEach(function (e) {
         allEvalNum += parseFloat(uncomma(e.innerText));
       });
-      totalEval.textContent = comma(allEvalNum.toFixed(0));
+      totalEvalEl.textContent = comma(allEvalNum.toFixed(0));
 
       // total profit 계산
       const allProfitEl = document.querySelectorAll(".profit");
@@ -153,49 +155,50 @@ const setStockData = (data) => {
       allProfitEl.forEach((e) => {
         allProfitNum += parseFloat(uncomma(e.innerText));
       });
-      totalProfit.textContent = comma(allProfitNum.toFixed(0));
+      totalProfitEl.textContent = comma(allProfitNum.toFixed(0));
 
       // total 수익률 계산
-      totalProfitRate.textContent =
+      totalProfitRateEl.textContent =
         (
-          (uncomma(totalProfit.textContent) / uncomma(totalAmt.textContent)) *
+          (uncomma(totalProfitEl.textContent) /
+            uncomma(totalAmtEl.textContent)) *
           100
         ).toFixed(2) + "%";
     } else {
       // input 두개에 값 없으면 "0" 표시
-      evalPrice.textContent = "0";
-      profit.textContent = "0";
-      profitRate.textContent = "0";
+      evalPriceEl.textContent = "0";
+      profitEl.textContent = "0";
+      profitRateEl.textContent = "0";
     }
 
     // style 변경
     if (riseFallData === "상승") {
-      changeRate.textContent = `+${cr_txt}%`;
-      changePrice.textContent = `+${cp_txt}`;
-      price.style.color =
-        changeRate.style.color =
-        changePrice.style.color =
+      changeRateEl.textContent = `+${cr_txt}%`;
+      changePriceEl.textContent = `+${cp_txt}`;
+      priceEl.style.color =
+        changeRateEl.style.color =
+        changePriceEl.style.color =
           "red";
     } else if (riseFallData === "하락") {
-      changeRate.textContent = `${cr_txt}%`;
-      changePrice.textContent = `${cp_txt}`;
-      price.style.color =
-        changeRate.style.color =
-        changePrice.style.color =
+      changeRateEl.textContent = `${cr_txt}%`;
+      changePriceEl.textContent = `${cp_txt}`;
+      priceEl.style.color =
+        changeRateEl.style.color =
+        changePriceEl.style.color =
           "blue";
     } else {
-      changeRate.textContent = `${cr_txt}%`;
-      changePrice.textContent = `${cp_txt}`;
-      price.style.color =
-        changeRate.style.color =
-        changePrice.style.color =
+      changeRateEl.textContent = `${cr_txt}%`;
+      changePriceEl.textContent = `${cp_txt}`;
+      priceEl.style.color =
+        changeRateEl.style.color =
+        changePriceEl.style.color =
           "black";
     }
     // price에 background 깜빡임 효과 주기
-    price.style.background = "linen";
+    priceEl.style.background = "linen";
     // 0.1s 후에 background 원래대로
     setTimeout(function () {
-      price.style.background = "white";
+      priceEl.style.background = "white";
     }, 100);
   }
 };

@@ -17,6 +17,7 @@ import {
 } from "chart/doughnut";
 import { checkMobile } from "common";
 import styles from "./portfolio.module.css";
+import useStore from "../../store/store";
 
 let stockInterval = {};
 const Portfolio = () => {
@@ -47,11 +48,13 @@ const Portfolio = () => {
       name: "삼성전자",
     },
   };
+
+  const { totalAmt, totalEval, totalProfit, totalProfitRate } = useStore();
   const cardSectionInfo = [
-    ["primary", "총 매수", "totalAmt"],
-    ["success", "총 평가", "totalEval"],
-    ["info", "평가손익", "totalProfit"],
-    ["warning", "수익률", "totalProfitRate"],
+    ["primary", "총 매수", "totalAmt", totalAmt],
+    ["success", "총 평가", "totalEval", totalEval],
+    ["info", "평가손익", "totalProfit", totalProfit],
+    ["warning", "수익률", "totalProfitRate", totalProfitRate],
   ];
   const chartSectionInfo = [
     ["7", "자산 흐름", "myAreaChart"],
@@ -252,7 +255,7 @@ const Portfolio = () => {
                       <span>{el[1]}</span>
                     </div>
                     <div className="text-dark font-weight-bold h5 mb-0">
-                      <span id={`${el[2]}`}>0</span>
+                      <span id={`${el[2]}`}>{el[3]}</span>
                     </div>
                   </div>
                 </div>
