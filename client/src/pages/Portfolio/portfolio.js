@@ -282,9 +282,9 @@ const Portfolio = () => {
     const riseFallData = data.compareToPreviousPrice.text;
 
     const totalAmtEl = document.querySelector("#totalAmt"); // 총 매수
-    const totalEvalEl = document.querySelector("#totalEval"); // 총 평가
+    // const totalEvalEl = document.querySelector("#totalEval"); // 총 평가
     const totalProfitEl = document.querySelector("#totalProfit"); // 평가손익
-    const totalProfitRateEl = document.querySelector("#totalProfitRate"); // 수익률
+    // const totalProfitRateEl = document.querySelector("#totalProfitRate"); // 수익률
 
     const priceEl = document.querySelector(`#A${data.itemCode}-price`);
     const changeRateEl = document.querySelector(
