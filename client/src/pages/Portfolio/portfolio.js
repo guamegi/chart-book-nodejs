@@ -339,32 +339,44 @@ const Portfolio = () => {
           amtNum += avgPriceNum[i] * amountNum[i];
         }
         // totalAmtEl.textContent = comma(amtNum.toFixed(0));
-        const total = comma(amtNum.toFixed(0));
-        setTotalAmt(total);
+        const totalData = comma(amtNum.toFixed(0));
+        setTotalAmt(totalData);
 
         // total eval 계산
         const allEvalEl = document.querySelectorAll(".eval");
         let allEvalNum = 0;
         allEvalEl.forEach(function (e) {
-          allEvalNum += parseFloat(uncomma(e.innerText));
+          if (e.innerText) allEvalNum += parseFloat(uncomma(e.innerText));
         });
-        totalEvalEl.textContent = comma(allEvalNum.toFixed(0));
+        // totalEvalEl.textContent = comma(allEvalNum.toFixed(0));
+        const evalData = comma(allEvalNum.toFixed(0));
+        setTotalEval(evalData);
 
         // total profit 계산
         const allProfitEl = document.querySelectorAll(".profit");
         let allProfitNum = 0;
         allProfitEl.forEach((e) => {
-          allProfitNum += parseFloat(uncomma(e.innerText));
+          if (e.innerText) allProfitNum += parseFloat(uncomma(e.innerText));
         });
-        totalProfitEl.textContent = comma(allProfitNum.toFixed(0));
+        // totalProfitEl.textContent = comma(allProfitNum.toFixed(0));
+        const profitData = comma(allProfitNum.toFixed(0));
+        setTotalProfit(profitData);
 
         // total 수익률 계산
-        totalProfitRateEl.textContent =
+        // totalProfitRateEl.textContent =
+        //   (
+        //     (uncomma(totalProfitEl.textContent) /
+        //       uncomma(totalAmtEl.textContent)) *
+        //     100
+        //   ).toFixed(2) + "%";
+        const profitRateData =
           (
             (uncomma(totalProfitEl.textContent) /
               uncomma(totalAmtEl.textContent)) *
             100
           ).toFixed(2) + "%";
+        // console.log(totalProfitEl.textContent, totalProfit, profitRateData);
+        setTotalProfitRate(profitRateData);
       } else {
         // input 두개에 값 없으면 "0" 표시
         evalPriceEl.textContent = "0";
