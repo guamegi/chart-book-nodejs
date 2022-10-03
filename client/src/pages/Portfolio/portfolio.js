@@ -218,11 +218,12 @@ const Portfolio = () => {
     if (ws.length > 0) {
       removeAllWebSocket(); // crypto
       for (let i in stockInterval) {
-        clearInterval(i); // stock
+        clearInterval(stockInterval[i]); // stock
+        stockInterval[i] = null;
       }
     }
     console.log("get data");
-    console.log(stockInterval);
+    // console.log(stockInterval);
 
     stockData.forEach(async (stock) => {
       if (stock.category === "coin") {
@@ -248,6 +249,7 @@ const Portfolio = () => {
       removeAllWebSocket();
       for (let i in stockInterval) {
         clearInterval(stockInterval[i]);
+        stockInterval[stockInterval[i]] = null;
       }
     }
   };
