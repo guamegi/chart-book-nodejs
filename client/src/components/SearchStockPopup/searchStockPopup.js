@@ -91,6 +91,7 @@ const searchStockPopup = forwardRef((props, ref) => {
           placeholder="종목명 입력"
           ref={ref}
           onChange={searchStock}
+          autoFocus
         />
         <div className="input-group-append">
           <button className="btn btn-primary py-0" type="button">

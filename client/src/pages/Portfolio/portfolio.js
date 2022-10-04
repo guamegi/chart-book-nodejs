@@ -175,13 +175,6 @@ const Portfolio = () => {
   // add new 클릭. 모달 창 열기
   const openModal = () => {
     setModalOn(!modalOn);
-
-    setTimeout(function () {
-      if (stockPopupEl.current) {
-        // console.log(stockPopupEl);
-        stockPopupEl.current.focus();
-      }
-    }, 100);
   };
 
   // background 클릭. 모달 창 닫기
