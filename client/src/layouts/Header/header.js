@@ -1,9 +1,22 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-class TopMenu extends React.Component {
-  render() {
-    return (
+const Header = () => {
+  return (
+    <header>
+      <nav className="navbar navbar-light navbar-expand bg-white topbar static-top">
+        <div className="container">
+          <NavLink
+            className="navbar-brand d-flex justify-content-center align-items-center topbar-brand m-0"
+            activeClassName="active"
+            to="/"
+          >
+            <div className="topbar-brand-text mx-4">
+              <span>ChartBook</span>
+            </div>
+          </NavLink>
+        </div>
+      </nav>
       <nav
         className={
           "navbar navbar-dark navbar-expand bg-gradient-primary shadow mb-4"
@@ -12,11 +25,7 @@ class TopMenu extends React.Component {
         <div className="container d-flex flex-row">
           <ul className="nav navbar-nav text-light">
             <li className="nav-item ml-3" role="presentation">
-              <NavLink
-                className="nav-link"
-                activeClassName="active"
-                to="/portfolio"
-              >
+              <NavLink className="nav-link" activeClassName="active" to="/">
                 <span>자산현황</span>
               </NavLink>
             </li>
@@ -32,8 +41,8 @@ class TopMenu extends React.Component {
           </ul>
         </div>
       </nav>
-    );
-  }
-}
+    </header>
+  );
+};
 
-export default TopMenu;
+export default Header;
