@@ -16,11 +16,11 @@ import {
   setDoughnutChart,
 } from "chart/doughnut";
 import { checkMobile, comma, uncomma } from "common";
-import styles from "./portfolio.module.css";
+import styles from "./home.module.css";
 import useStore from "../../store/store";
 
 let stockInterval = {};
-const Portfolio = () => {
+const Home = () => {
   const [stockData, setStockData] = useState([]);
   const [modalOn, setModalOn] = useState(false);
   const addButtonEl = useRef();
@@ -638,4 +638,4 @@ const Portfolio = () => {
   );
 };
 
-export default Portfolio;
+export default Home;

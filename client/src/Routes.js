@@ -2,13 +2,13 @@ import React from "react";
 import { Switch, Redirect } from "react-router-dom";
 import { ProtectedRouteWithLayout } from "./components";
 import Layout from "./layouts";
-import { Market, Portfolio, NotFound } from "./pages";
+import { Home, Market, NotFound } from "./pages";
 
 const Routes = () => {
   return (
     <Switch>
       <ProtectedRouteWithLayout
-        component={Portfolio}
+        component={Home}
         exact
         layout={Layout}
         path="/"
