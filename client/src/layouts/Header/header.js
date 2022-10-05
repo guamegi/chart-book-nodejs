@@ -25,7 +25,12 @@ const Header = () => {
         <div className="container d-flex flex-row">
           <ul className="nav navbar-nav text-light">
             <li className="nav-item ml-3" role="presentation">
-              <NavLink className="nav-link" activeClassName="active" to="/">
+              <NavLink
+                className="nav-link"
+                activeClassName="active"
+                exact
+                to="/"
+              >
                 <span>자산현황</span>
               </NavLink>
             </li>
