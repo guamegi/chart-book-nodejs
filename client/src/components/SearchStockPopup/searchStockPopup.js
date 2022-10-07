@@ -5,7 +5,8 @@ import { initWebSocket } from "services/websocket";
 import { addStockData } from "services/crawler";
 import styles from "./searchStockPopup.module.css";
 
-const searchStockPopup = forwardRef((props, ref) => {
+const SearchStockPopup = forwardRef((props, ref) => {
+  // console.log(props, ref);
   const {
     modalOn,
     setModalOn,
@@ -110,4 +111,4 @@ const searchStockPopup = forwardRef((props, ref) => {
   );
 });
 
-export default searchStockPopup;
+export default SearchStockPopup;

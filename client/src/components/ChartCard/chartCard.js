@@ -31,4 +31,13 @@ const ChartCard = ({ item }) => {
   );
 };
 
+ChartCard.defaultProps = {
+  item: {
+    name: "다우존스",
+    shortName: "DJI",
+    code: "DJI",
+    price: "29,430.55",
+  },
+};
+
 export default ChartCard;
