@@ -481,7 +481,7 @@ const Home = () => {
             <i className="fas fa-trash mr-2"></i>
             전체 삭제
           </div>
-          {modalOn ? (
+          {modalOn && (
             <SearchStockPopup
               modalOn={modalOn}
               setModalOn={setModalOn}
@@ -492,8 +492,6 @@ const Home = () => {
               stockInterval={stockInterval}
               stockUpdateTime={stockUpdateTime}
             />
-          ) : (
-            ""
           )}
         </div>
         <div
