@@ -187,6 +187,33 @@ const Home = () => {
         wickDownColor: "blue",
       });
       candleSeries.setData(candleArr);
+      // marker 테스트
+      // candleSeries.setMarkers([
+      //   {
+      //     time: "2022-09-24",
+      //     position: "aboveBar",
+      //     color: "green",
+      //     shape: "arrowDown",
+      //     size: 2,
+      //   },
+      //   {
+      //     time: "2022-10-25",
+      //     position: "belowBar",
+      //     color: "red",
+      //     shape: "arrowUp",
+      //     id: "id3",
+      //     size: 2,
+      //   },
+      //   {
+      //     time: "2022-11-10",
+      //     position: "belowBar",
+      //     color: "orange",
+      //     shape: "arrowUp",
+      //     id: "id4",
+      //     text: "example",
+      //     size: 2,
+      //   },
+      // ]);
 
       // 거래량 데이터 차트 셋팅
       histArr.shift();

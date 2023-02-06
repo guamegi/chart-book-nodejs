@@ -96,13 +96,13 @@ const Home = () => {
     // localData 체크
     const localDataStr = localStorage.getItem("saveData");
     let data = null;
-    console.log("load data");
+    // console.log("load data");
 
     if (localDataStr) {
-      console.log("saved");
+      // console.log("saved");
       data = JSON.parse(localDataStr);
     } else {
-      console.log("not saved");
+      // console.log("not saved");
       // default data
       data = { ...defaultData };
     }
@@ -190,7 +190,7 @@ const Home = () => {
 
   // 개별 종목 삭제
   const removeStock = (code, index) => {
-    console.log("remove");
+    // console.log("removed");
     // console.log(code, index);
     setStockData(stockData.filter((stock) => stock.code !== code));
     if (ws.length > 0) {
@@ -201,7 +201,7 @@ const Home = () => {
 
   // remove all 클릭. 전체 종목 삭제
   const removeAllStock = () => {
-    console.log("remove all");
+    // console.log("removed all");
     setStockData([]);
     if (ws.length > 0) {
       // 웹소켓 전체 삭제
@@ -218,7 +218,7 @@ const Home = () => {
         stockInterval[i] = null;
       }
     }
-    console.log("get data");
+    // console.log("get data");
     // console.log(stockInterval);
 
     stockData.forEach(async (stock) => {
@@ -238,7 +238,7 @@ const Home = () => {
 
   // 실시간 off
   const stopData = () => {
-    console.log("stop data");
+    // console.log("stop data");
     // console.log(stockInterval);
 
     if (ws.length > 0) {
@@ -250,9 +250,9 @@ const Home = () => {
     }
   };
 
-  // 탭 변환시
+  // 메뉴 전환시
   const handleVisibilityChange = () => {
-    console.log("is hidden:", document.hidden);
+    // console.log("is hidden:", document.hidden);
     // console.log(ws);
 
     // 현재 페이지 활성화시 소켓 연결

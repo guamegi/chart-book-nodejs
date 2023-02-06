@@ -1,12 +1,6 @@
-// express 모듈 불러오기
 const express = require("express");
-
-// express 객체 생성
 const app = express();
-
-// path 모듈 불러오기
 const path = require("path");
-
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 // 주식 종목 시세 호출
