@@ -3,9 +3,9 @@ import React, { forwardRef, useState } from "react";
 import stockList from "data/stockList";
 import { initWebSocket } from "services/websocket";
 import { addStockData } from "services/crawler";
-import styles from "./searchStockPopup.module.css";
+import styles from "./searchModal.module.css";
 
-const SearchStockPopup = forwardRef((props, ref) => {
+const SearchModal = forwardRef((props, ref) => {
   // console.log(props, ref);
   const {
     modalOn,
@@ -111,4 +111,4 @@ const SearchStockPopup = forwardRef((props, ref) => {
   );
 });
 
-export default SearchStockPopup;
+export default SearchModal;

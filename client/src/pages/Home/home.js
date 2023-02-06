@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import NumberFormat from "react-number-format";
 
-import { SearchStockPopup } from "components";
+import { SearchModal } from "components";
 import {
   ws,
   removeWebSocket,
@@ -488,7 +488,7 @@ const Home = () => {
             전체 삭제
           </div>
           {modalOn && (
-            <SearchStockPopup
+            <SearchModal
               modalOn={modalOn}
               setModalOn={setModalOn}
               stockData={stockData}
