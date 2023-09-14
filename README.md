@@ -1,6 +1,6 @@
 # React 주식&가상화폐 포트폴리오(with Express)
 
-기존 로컬에서 동작하는 chart book 프로젝트(https://github.com/guamegi/chart-book)에 proxy middleware 추가 <br/><br/>
+기존 로컬에서 동작하는 chart book 프로젝트( https://github.com/guamegi/chart-book )에 proxy middleware 추가 <br/><br/>
 서버 이전: heroku -> AWS <br/>
 https://chart-book.herokuapp.com/ -> http://chartbook-env.eba-i9kwj8ti.ap-northeast-2.elasticbeanstalk.com/portfolio
 
