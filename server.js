@@ -4,22 +4,22 @@ const app = express();
 const path = require("path");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
-const whitelist = [
-  "https://web-chart-book-client-jvpb2aln39jnz0.sel5.cloudtype.app",
-];
+// const whitelist = [
+//   "https://web-chart-book-client-jvpb2aln39jnz0.sel5.cloudtype.app",
+// ];
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      // 만일 whitelist 배열에 origin인자가 있을 경우
-      callback(null, true); // cors 허용
-    } else {
-      callback(new Error("Not Allowed Origin!")); // cors 비허용
-    }
-  },
-};
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       // 만일 whitelist 배열에 origin인자가 있을 경우
+//       callback(null, true); // cors 허용
+//     } else {
+//       callback(new Error("Not Allowed Origin!")); // cors 비허용
+//     }
+//   },
+// };
 
-app.use(cors(corsOptions)); // 옵션을 추가한 CORS 미들웨어 추가
+app.use(cors()); // 옵션을 추가한 CORS 미들웨어 추가
 
 // 주식 종목 시세 호출
 app.use(
