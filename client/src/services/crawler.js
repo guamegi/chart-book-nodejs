@@ -1,7 +1,5 @@
 import * as axios from "axios";
 import { getToday } from "common";
-// import { comma, uncomma, getToday } from "common";
-// import useStore from "../store/store";
 
 /**
  * 다우,나스닥,snp,영국,프랑스,독일 지수
@@ -20,7 +18,6 @@ const addCardData = async () => {
     }
   };
   await getHtml().then((html) => {
-    // return html.data.datas;
     data = html.data.datas;
   });
 
@@ -37,7 +34,6 @@ const addIndexData = async (symbol = "KOSPI", timeframe = "day") => {
 
   // index 크롤링
   const getHtml = async (symbol, startTime, endTime, timeframe) => {
-    // console.log(symbol, startTime, endTime, timeframe);
     const stockUrl = `/siseJson.naver?symbol=${symbol}&requestType=1&startTime=${startTime}&endTime=${endTime}&timeframe=${timeframe}`;
 
     try {
@@ -48,7 +44,6 @@ const addIndexData = async (symbol = "KOSPI", timeframe = "day") => {
   };
 
   await getHtml(symbol, startTime, endTime, timeframe).then((html) => {
-    // console.log(html.data, typeof html.data);
     let tempData = html.data.replaceAll("'", '"');
     data = JSON.parse(tempData);
   });
@@ -61,7 +56,6 @@ const addStockData = async (code) => {
   // let data = null;
 
   // stock 크롤링
-  // const getHtml = async (code) => {
   const stockUrl = `/api/realtime/domestic/stock/${code}`;
 
   try {
